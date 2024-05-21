@@ -19,8 +19,13 @@ jobs:
 
       - name: Create kubeconfig file
         run: |
-          echo "$KUBE_CONFIG" > kubeconfig.yaml
+          echo "${{ secrets.KUBE_CONFIG }}" > kubeconfig.yaml
+
+      - name: Validate kubeconfig
+        run: |
+          kubectl config view --kubeconfig=kubeconfig.yaml
+          kubectl get nodes --kubeconfig=kubeconfig.yaml
 
       - name: Apply Ingress Controller
         run: |
-          kubectl apply -f ingress-controller.yaml --kubeconfig=kubeconfig.yaml --validate=false     
+          kubectl apply -f ingress-controller.yaml --kubeconfig=kubeconfig.yaml --validate=false
