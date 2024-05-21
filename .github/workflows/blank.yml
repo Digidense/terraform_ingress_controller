@@ -1,7 +1,11 @@
-name: Create kubeconfig
+name: Create kubectl and Deploy Ingress Controller
 
 on:
+  workflow_dispatch:
   push:
+    branches:
+      - development
+  pull_request:
     branches:
       - development
 
