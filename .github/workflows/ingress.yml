@@ -1,12 +1,16 @@
-name: Create kubeconfigs
+name: Deploy Ingress Controller
 
 on:
+  workflow_dispatch:
   push:
     branches:
-      - main
+      - development
+  pull_request:
+    branches:
+      - development
 
 jobs:
-  create-kubeconfig:
+  deploy-ingress-controller:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -18,5 +22,8 @@ jobs:
           kubeconfig: ${{ secrets.KUBE_CONFIG }}
 
       - name: Create kubeconfig file
+        run: echo "$KUBE_CONFIG" > kubeconfig.yaml
+
+      - name: Apply Ingress Controller
         run: |
-          echo "$KUBE_CONFIG" > kubeconfig.yaml
+          kubectl apply -f ingress-controller.yaml --kubeconfig=kubeconfig.yaml --validate=false
