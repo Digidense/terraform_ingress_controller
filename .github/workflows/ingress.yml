@@ -1,6 +1,7 @@
 name: Deploy Ingress Controller
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - development
@@ -23,6 +24,4 @@ jobs:
       - name: Create kubeconfig file
         run: echo "$KUBE_CONFIG" > kubeconfig.yaml
 
-      - name: Apply Ingress Controller
-        run: |
-          kubectl apply -f ingress-controller.yaml --kubeconfig=kubeconfig.yaml --validate=false
+      
