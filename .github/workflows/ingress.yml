@@ -2,7 +2,8 @@ name: Deploy Ingress Controller
 
 on:
   push:
-    branches: ["development"]
+    branches:
+      - development
   workflow_dispatch:
 
 
