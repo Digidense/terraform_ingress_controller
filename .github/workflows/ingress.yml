@@ -1,4 +1,4 @@
-name: Create kubeconfig
+name: Create kubeconfigs
 
 on:
   push:
