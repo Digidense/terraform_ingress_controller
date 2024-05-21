@@ -1,13 +1,12 @@
 name: Deploy Ingress Controller
 
 on:
-  workflow_dispatch:
   push:
     branches:
-      - development
+      - main
   pull_request:
     branches:
-      - development
+      - main
 
 jobs:
   deploy-ingress-controller:
