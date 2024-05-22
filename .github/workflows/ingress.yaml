@@ -12,10 +12,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up kubectl
-        uses: azure/k8s-set-context@v1
+      - name: Set the Kubernetes context
+        uses: azure/k8s-set-context@v2
         with:
-          kubeconfig: ${{ secrets.KUBE_CONFIG }}
+          method: service-account
+          k8s-url: https://F173F9DC1AEA27CA9C66A37BEE1DB28E.gr7.us-east-1.eks.amazonaws.com
+          k8s-secret: ${{ secrets.KUBE_CONFIG }}
 
       - name: Create kubeconfig file
         run: |
