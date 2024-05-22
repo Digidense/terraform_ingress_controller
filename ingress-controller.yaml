@@ -20,8 +20,8 @@ spec:
           image: k8s.gcr.io/ingress-nginx/controller:v1.0.0
           args:
             - /nginx-ingress-controller
-            - --publish-service=$(POD_NAMESPACE)/ingress-nginx-controller
-            - --configmap=$(POD_NAMESPACE)/ingress-nginx-controller
+            - --publish-service=https://F173F9DC1AEA27CA9C66A37BEE1DB28E.gr7.us-east-1.eks.amazonaws.com/ingress-nginx-controller
+            - --configmap=https://F173F9DC1AEA27CA9C66A37BEE1DB28E.gr7.us-east-1.eks.amazonaws.com/ingress-nginx-controller
           ports:
             - name: http
               containerPort: 80
