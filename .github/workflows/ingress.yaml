@@ -35,7 +35,8 @@ jobs:
           kubectl config set-credentials Flash_Cluster-credentials --token=${{ secrets.KUBE_TOKEN }}
           kubectl config set-context Flash_Cluster-context --cluster=Flash_Cluster --user=Flash_Cluster-credentials
           kubectl config use-context Flash_Cluster-context
-        
+          touch kubeconfig.yaml  # Create an empty kubeconfig.yaml file
+
       - name: Apply Ingress Controller
         run: |
           kubectl apply -f ingress-controller.yaml --kubeconfig=kubeconfig.yaml --validate=false
