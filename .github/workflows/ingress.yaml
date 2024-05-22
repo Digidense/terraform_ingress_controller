@@ -1,4 +1,4 @@
-name: Create kubeconfig
+name: Deploy Ingress Controller
 
 on:
   push:
@@ -17,7 +17,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1   
+          aws-region: us-east-1
 
       - name: Set up kubectl
         uses: azure/setup-kubectl@v1
@@ -32,7 +32,7 @@ jobs:
           mkdir -p $(dirname $KUBECONFIG)
           echo "" > $KUBECONFIG
           kubectl config set-cluster Flash_Cluster --server=https://F173F9DC1AEA27CA9C66A37BEE1DB28E.gr7.us-east-1.eks.amazonaws.com
-          kubectl config set-credentials Flash_Cluster-credentials --token=$KUBE_TOKEN
+          kubectl config set-credentials Flash_Cluster-credentials --token=${{ secrets.KUBE_TOKEN }}
           kubectl config set-context Flash_Cluster-context --cluster=Flash_Cluster --user=Flash_Cluster-credentials
           kubectl config use-context Flash_Cluster-context
         
