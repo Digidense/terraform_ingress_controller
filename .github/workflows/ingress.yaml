@@ -22,7 +22,7 @@ jobs:
       - name: Set up kubectl
         uses: azure/setup-kubectl@v1
         with:
-          version: 'v1.20.0'  # Specify the version of kubectl you need
+          version: 'v1.20.0' 
 
       - name: Authenticate with K8s Cluster
         env:
@@ -32,10 +32,10 @@ jobs:
           mkdir -p $(dirname $KUBECONFIG)
           echo "" > $KUBECONFIG
           kubectl config set-cluster Flash_Cluster --server=https://F173F9DC1AEA27CA9C66A37BEE1DB28E.gr7.us-east-1.eks.amazonaws.com
-          kubectl config set-credentials Flash_Cluster-credentials --token=${{ secrets.KUBE_TOKEN }}
+          kubectl config set-credentials Flash_Cluster-credentials --token=$KUBE_TOKEN
           kubectl config set-context Flash_Cluster-context --cluster=Flash_Cluster --user=Flash_Cluster-credentials
           kubectl config use-context Flash_Cluster-context
-          touch kubeconfig.yaml  # Create an empty kubeconfig.yaml file
+          touch kubeconfig.yaml 
 
       - name: Apply Ingress Controller
         run: |
