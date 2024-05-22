@@ -20,7 +20,7 @@ jobs:
       - name: Create kubeconfig file
         run: |
           echo "$KUBE_CONFIG" > kubeconfig.yaml
-          echo "  server: https://F173F9DC1AEA27CA9C66A37BEE1DB28E.gr7.us-east-1.eks.amazonaws.com" >> kubeconfig.yaml
+          echo "server: https://F173F9DC1AEA27CA9C66A37BEE1DB28E.gr7.us-east-1.eks.amazonaws.com" >> kubeconfig.yaml
 
       - name: Apply Ingress Controller
         run: |
