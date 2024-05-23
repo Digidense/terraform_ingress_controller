@@ -52,7 +52,7 @@ jobs:
         env:
           KUBECONFIG: ${{ github.workspace }}/.kube/config
         run: |
-          kubectl apply -f ingress-controller.yaml --validate=false
+          kubectl apply -f ingress-controller.yaml 
 
       - name: Get Ingress Controller Service
         env:
