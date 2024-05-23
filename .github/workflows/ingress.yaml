@@ -35,6 +35,9 @@ jobs:
           kubectl config set-context Flash_Cluster-context --cluster=Flash_Cluster --user=Flash_Cluster-credentials
           kubectl config use-context Flash_Cluster-context
 
+      - name: Debug KUBECONFIG
+        run: cat ${{ github.workspace }}/.kube/config
+
       - name: Apply Kubernetes manifests
         env:
           KUBECONFIG: ${{ github.workspace }}/.kube/config
