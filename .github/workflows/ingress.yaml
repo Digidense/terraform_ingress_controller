@@ -37,7 +37,7 @@ jobs:
         run: |
           mkdir -p $(dirname $KUBECONFIG)
           touch $KUBECONFIG
-          aws eks update-kubeconfig --name Flash_Cluster_EKS --region us-east-1 --kubeconfig $KUBECONFIG
+          aws eks update-kubeconfig --name Flash_Cluster --region us-east-1 --kubeconfig $KUBECONFIG
           echo "Kubeconfig contents:"
           cat $KUBECONFIG
 
@@ -48,7 +48,7 @@ jobs:
           kubectl config view
           kubectl get nodes
 
-      - name: Apply Kubernetes manifests
+      - name: Apply ingress controller
         env:
          KUBECONFIG: ${{ github.workspace }}/.kube/config
         
