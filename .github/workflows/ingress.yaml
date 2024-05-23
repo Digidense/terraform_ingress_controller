@@ -1,4 +1,4 @@
-name: Deploy Ingress Controller
+name: Kubectl Deploy Ingress Controller
 
 on:
   push:
