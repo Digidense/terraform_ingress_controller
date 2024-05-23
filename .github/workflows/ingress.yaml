@@ -18,22 +18,22 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
+
       - name: Install kubectl
         run: |
-         curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-         chmod +x ./kubectl
-         sudo mv ./kubectl /usr/local/bin/kubectl
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x ./kubectl
+          sudo mv ./kubectl /usr/local/bin/kubectl
 
       - name: Install aws-iam-authenticator
         run: |
-         curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.18.9/2020-11-02/bin/linux/amd64/aws-iam-authenticator
-         chmod +x ./aws-iam-authenticator
-         sudo mv ./aws-iam-authenticator /usr/local/bin/aws-iam-authenticator
-
+          curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.18.9/2020-11-02/bin/linux/amd64/aws-iam-authenticator
+          chmod +x ./aws-iam-authenticator
+          sudo mv ./aws-iam-authenticator /usr/local/bin/aws-iam-authenticator
 
       - name: Update kubeconfig
         env:
-         KUBECONFIG: ${{ github.workspace }}/.kube/config
+          KUBECONFIG: ${{ github.workspace }}/.kube/config
         run: |
           mkdir -p $(dirname $KUBECONFIG)
           touch $KUBECONFIG
@@ -43,14 +43,19 @@ jobs:
 
       - name: Validate kubeconfig
         env:
-         KUBECONFIG: ${{ github.workspace }}/.kube/config
+          KUBECONFIG: ${{ github.workspace }}/.kube/config
         run: |
           kubectl config view
           kubectl get nodes
 
       - name: Apply ingress controller
         env:
-         KUBECONFIG: ${{ github.workspace }}/.kube/config
-        
+          KUBECONFIG: ${{ github.workspace }}/.kube/config
         run: |
           kubectl apply -f ingress-controller.yaml --validate=false
+
+      - name: Get Ingress Controller Service
+        env:
+          KUBECONFIG: ${{ github.workspace }}/.kube/config
+        run: |
+          kubectl -n ingress-nginx get svc
