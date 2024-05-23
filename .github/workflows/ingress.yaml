@@ -30,17 +30,13 @@ jobs:
           KUBE_TOKEN: ${{ secrets.KUBE_TOKEN }}
         run: |
           mkdir -p $(dirname $KUBECONFIG)
-          echo "" > $KUBECONFIG
-          kubectl config set-cluster Flash_Cluster --server=https://F173F9DC1AEA27CA9C66A37BEE1DB28E.gr7.us-east-1.eks.amazonaws.com
-          kubectl config set-credentials Flash_Cluster-credentials --token=${{ secrets.KUBE_TOKEN }}
+          kubectl config set-cluster Flash_Cluster --server=https://F173F9DC1AEA27CA9C66A37BEE1DB28E.gr7.us-east-1.eks.amazonaws.com --insecure-skip-tls-verify=true
+          kubectl config set-credentials Flash_Cluster-credentials --token=${KUBE_TOKEN}
           kubectl config set-context Flash_Cluster-context --cluster=Flash_Cluster --user=Flash_Cluster-credentials
           kubectl config use-context Flash_Cluster-context
-          touch kubeconfig.yaml  
-      - name: Create kubeconfig file
-        run: |
-          echo "$KUBE_CONFIG" > kubeconfig.yaml
+
       - name: Apply Kubernetes manifests
         env:
-         KUBECONFIG: ${{ github.workspace }}/.kube/config
+          KUBECONFIG: ${{ github.workspace }}/.kube/config
         run: |
-         kubectl apply -f ingress-controller.yaml --validate=false
+          kubectl apply -f ingress-controller.yaml --validate=false
