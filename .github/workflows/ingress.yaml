@@ -31,7 +31,7 @@ jobs:
         run: |
           mkdir -p $(dirname $KUBECONFIG)
           kubectl config set-cluster Flash_Cluster --server=https://F173F9DC1AEA27CA9C66A37BEE1DB28E.gr7.us-east-1.eks.amazonaws.com --insecure-skip-tls-verify=true
-          kubectl config set-credentials Flash_Cluster-credentials --token=$KUBE_TOKEN
+          kubectl config set-credentials Flash_Cluster-credentials --token=${KUBE_TOKEN}
           kubectl config set-context Flash_Cluster-context --cluster=Flash_Cluster --user=Flash_Cluster-credentials
           kubectl config use-context Flash_Cluster-context
 
