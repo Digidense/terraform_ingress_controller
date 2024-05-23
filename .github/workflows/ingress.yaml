@@ -25,11 +25,11 @@ jobs:
           chmod +x ./kubectl
           sudo mv ./kubectl /usr/local/bin/kubectl
 
-      # - name: Install aws-iam-authenticator
-      #   run: |
-      #     curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.18.9/2020-11-02/bin/linux/amd64/aws-iam-authenticator
-      #     chmod +x ./aws-iam-authenticator
-      #     sudo mv ./aws-iam-authenticator /usr/local/bin/aws-iam-authenticator
+      - name: Install aws-iam-authenticator
+        run: |
+          curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.18.9/2020-11-02/bin/linux/amd64/aws-iam-authenticator
+          chmod +x ./aws-iam-authenticator
+          sudo mv ./aws-iam-authenticator /usr/local/bin/aws-iam-authenticator
 
       - name: Update kubeconfig
         env:
@@ -37,7 +37,7 @@ jobs:
         run: |
           mkdir -p $(dirname $KUBECONFIG)
           touch $KUBECONFIG
-          # aws eks update-kubeconfig --name Flash_Cluster --region us-east-1 --kubeconfig $KUBECONFIG
+          aws eks update-kubeconfig --name Flash_Cluster --region us-east-1 --kubeconfig $KUBECONFIG
           echo "Kubeconfig contents:"
           cat $KUBECONFIG
 
