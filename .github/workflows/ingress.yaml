@@ -49,13 +49,13 @@ jobs:
           kubectl get nodes
 
       - name: Apply ingress controller
-        env:
-          KUBECONFIG: ${{ github.workspace }}/.kube/config
+        # env:
+        #   KUBECONFIG: ${{ github.workspace }}/.kube/config
         run: |
           kubectl apply -f ingress-controller.yaml 
 
       - name: Get Ingress Controller Service
-        # env:
-        #   KUBECONFIG: ${{ github.workspace }}/.kube/config
+        env:
+          KUBECONFIG: ${{ github.workspace }}/.kube/config
         run: |
           kubectl -n ingress-nginx get svc
