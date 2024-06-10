@@ -37,7 +37,7 @@ jobs:
         run: |
           mkdir -p $(dirname $KUBECONFIG)
           touch $KUBECONFIG
-          aws eks update-kubeconfig --name Flash_Cluster --region us-east-1 --kubeconfig $KUBECONFIG
+          aws eks update-kubeconfig --name Unique_Cluster --region us-east-1 --kubeconfig $KUBECONFIG
           echo "Kubeconfig contents:"
           cat $KUBECONFIG
 
